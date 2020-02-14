@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1581601264 source:d:\学习\c++\代码\mygobang\main.cpp
+	<iostream>
+	<vector>
+	<array>
+	<windows.h>
+	<iomanip>
+	<cstdio>
+
+1581558989 source:d:\学习\c++\代码\mygobang\board.cpp
+
