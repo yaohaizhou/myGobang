@@ -43,7 +43,7 @@ tags: 技术
 
 ## 源码
 
-https://github.com/zyhhhy/myGobangDay1
+https://github.com/zyhhhy/myGobang/tree/master/myGobangDay1
 
 
 
@@ -75,7 +75,7 @@ https://blog.csdn.net/duanghaha/article/details/80835449
 
 使用操作很简单，在软件中选中编译出来的exe文件，得到下图所示。然后从系统库中复制出来需要的dll库，放到与exe同级的文件夹里面。如此在别人未配置环境的电脑上就能独立运行exe文件了。
 
-![1581689653836](D:\hexo\source\_posts\1581689653836.png)
+![1581689653836](1581689653836.png)
 
 附Dependencies网盘下载 地址
 
@@ -97,3 +97,4 @@ AI是MAX层，在所有下方叶子节点中选择极大值，而人类是MIN层
 
 ## 源码
 
+https://github.com/zyhhhy/myGobang/tree/master/myGobangDay2
