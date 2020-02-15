@@ -1,0 +1,50 @@
+# depslib dependency file v1.0
+1581601264 source:d:\学习\c++\代码\mygobang\main.cpp
+	<iostream>
+	<vector>
+	<array>
+	<windows.h>
+	<iomanip>
+	<cstdio>
+
+1581558989 source:d:\学习\c++\代码\mygobang\board.cpp
+
+1581650060 source:d:\学习\c++\代码\mygobangday2\main.cpp
+	<iostream>
+	<vector>
+	<array>
+	<windows.h>
+	<iomanip>
+	<cstdio>
+	<graphics.h>
+
+1581667677 source:d:\学习\c++\代码\mygobangday3\main.cpp
+	<iostream>
+	<array>
+	<windows.h>
+	<iomanip>
+	<cstdio>
+	<graphics.h>
+
+1581672690 source:d:\workspaces\cbproject\mygobangday3\main.cpp
+	<iostream>
+	<array>
+	<windows.h>
+	<iomanip>
+	<cstdio>
+	<graphics.h>
+
+1581735663 source:d:\workspaces\cbproject\mygobangday2ai\main.cpp
+	"Board.h"
+
+1581742028 d:\workspaces\cbproject\mygobangday2ai\board.h
+	<iostream>
+	<array>
+	<windows.h>
+	<iomanip>
+	<cstdio>
+	<graphics.h>
+
+1581741995 source:d:\workspaces\cbproject\mygobangday2ai\board.cpp
+	"Board.h"
+
