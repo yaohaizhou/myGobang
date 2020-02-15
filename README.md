@@ -5,6 +5,8 @@ tags: 技术
 
 ---
 
+如要运行程序，请把每个项目bin目录下的exe文件移到DLL文件夹下后打开。
+
 # 第一天
 
 ![1581601430068](1581601430068.png)
@@ -99,7 +101,11 @@ AI是MAX层，在所有下方叶子节点中选择极大值，而人类是MIN层
 
 https://github.com/zyhhhy/myGobang/tree/master/myGobangDay2
 
+
+
 # 第三天
+
+## AI算法
 
 现在使用极大极小值算法总是出现问题。
 
@@ -125,7 +131,7 @@ return (chess[row][col] == turn);
 
 综上，虽然整个棋盘的成员函数有顶层设计，但是总觉得设计得不够，很明显是经验不足。导致后来经常被作用域坑了。我需要稍微调整一下思路，把能修改接口的部分还是修改一下，不然整个程序可能很难运行了。
 
-## 代码整理
+### 代码整理
 
 整体是通过row和col来传递计算得到的值进行落子的
 
@@ -157,15 +163,81 @@ AI知道赢但是不知道堵
 
 现在AI已经明显升级了，大概也有小学水平了。（以前是幼儿园水平）
 
-## 接下来要做的
+### 接下来要做的
 
 一直还没做alpha-beta剪枝，这个可以不影响计算的正确率同时提高速度，值得研究研究。
 
 启发式评估
 
-## 阶段性成果源码
+### AI阶段性成果源码
 
-https://github.com/zyhhhy/myGobang/tree/master/myGobangDay3
+https://github.com/zyhhhy/myGobang/tree/master/myGobangDay3AI
+
+
+
+## alpha-beta剪枝解释
+
+![](maxmin1.jpg)
+
+还是以本图为例。看最右边的第二层的5到第三层的8中间划掉的两杠（1），这就是剪枝。
+
+原理：当我们计算到图中（2）处的5时，因为第二层选择极小值，所以第二层的节点不可能大于5，而又因为第一二仓选择极大值，同时5比目前的极大值6要小。因此无论（1）这条线下方的点数是多少，都不可能使第二层的值变大（只可能变小），更不可能使第一层的值变大。所以（1）以下部分就不需要继续计算了。
+
+所以说我们要做的就是把维护第二层MIN的极小值MIN与从第三层返回的值temp进行比较，如果MIN<temp也就说不可能改变MIN的值了，所以第三层其他可能性不需要算下去了。
+
+### alpha-beta阶段性成果源码
+
+https://github.com/zyhhhy/myGobang/tree/master/myGobangDay3AICut
+
+
+
+## 启发式搜索
+
+### 启发式搜索解释
+
+如上所示，我们可以想象如果在第二层MIN中，我们对所有点的当前局面得分值（并非从下往上得来的值）进行一个排序，然后从大到小进行下一层的计算，由分析可得剪枝的概率大大增加，时间消耗快速下降。
+
+### 遇到的问题
+
+我定义一个结构体，存放极大20个得分点的行、列和得分值
+
+```c++
+typedef struct order
+{
+    int orderi;
+    int orderj;
+    int orderpoint;
+}Order;
+```
+
+但是头痛的是如果要按照orderpoint即得分值排序比较困难。
+
+令人振奋的是，C++的<algorithm>头函数李提供sort函数，可以对结构体按照指定成员排序。具体做法如下：
+
+```c++
+//定义函数
+static bool cmp(Order,Order);
+bool Board::cmp(Order x,Order y)
+{
+    return (x.orderpoint) > (y.orderpoint);// >降序  <升序
+}
+//调用sort
+std::sort(orderSort,orderSort+N*N,cmp);
+```
+
+注意上述的cmp函数必须定义为static类型，否则会报错。
+
+如此一来，结构体数组就被排序成功。然后再把前20个（自己设定）拿来计算，就可以省去很多无用的计算了。
+
+### 启发式搜索阶段性成果源码
+
+https://github.com/zyhhhy/myGobang/tree/master/myGobangDay3HEURISTIC
+
+
+
+
+
+
 
 
 
