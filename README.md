@@ -1,11 +1,6 @@
----
-title: C++写AI五子棋
-date: 2020-02-13 21:42:04
-tags: 技术
+PS：如要运行程序，请把每个项目bin目录下的exe文件移到DLL文件夹下后打开。
 
----
-
-如要运行程序，请把每个项目bin目录下的exe文件移到DLL文件夹下后打开。
+​		在myGobangDay3HEURISTIC文件夹中代码有详细注释。
 
 # 第一天
 
@@ -52,6 +47,8 @@ https://github.com/zyhhhy/myGobang/tree/master/myGobangDay1
 # 第二天
 
 今天主要干了三件事，EGE配置GUI，Dependencies查找dll还有极大极小值算法实现初步AI。
+
+![1581818476559](1581818476559.png)
 
 ## EGE部分
 
@@ -104,6 +101,8 @@ https://github.com/zyhhhy/myGobang/tree/master/myGobangDay2
 
 
 # 第三天
+
+![1581818636193](1581818636193.png)
 
 ## AI算法
 
@@ -212,7 +211,7 @@ typedef struct order
 
 但是头痛的是如果要按照orderpoint即得分值排序比较困难。
 
-令人振奋的是，C++的<algorithm>头函数李提供sort函数，可以对结构体按照指定成员排序。具体做法如下：
+令人振奋的是，C++的<algorithm>头函数里提供sort函数，可以对结构体按照指定成员排序。具体做法如下：
 
 ```c++
 //定义函数
@@ -235,7 +234,7 @@ https://github.com/zyhhhy/myGobang/tree/master/myGobangDay3HEURISTIC
 
 
 
-
+# To be continued
 
 
 

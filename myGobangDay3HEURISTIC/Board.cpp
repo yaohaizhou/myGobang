@@ -1,5 +1,16 @@
+/*
+ * @Descripttion: Board函数实现
+ * @version: 五子棋第三天启发式搜索版本（启发式搜索+alpha-beta剪枝+极大极小值算法）
+ * @Author: 周耀海 u201811260@hust.edu.cn
+ * @LastEditTime: 2020-02-16 09:48:29
+ */
 #include "Board.h"
-//using namespace std;
+/**
+ * @name: Board
+ * @msg: 构造函数，用于初始化参数
+ * @param none
+ * @return: void
+ */
 Board::Board()
 {
     int i, j;
@@ -46,12 +57,16 @@ Board::Board()
     dy = { 0, 1, 1, 1, 0, -1, -1, -1 };
     is_end = true;
     msg = {0};
-//    orderI={0};
-//    orderJ={0};
     orderSort[AI_MAX_CHOICE]={0};
 
 }
-void Board::printBoard()///打印棋盘
+/**
+ * @name: printBoard
+ * @msg: 用于打印棋盘
+ * @param none
+ * @return: void
+ */
+void Board::printBoard()
 {
     int i, j;
     setbkcolor(EGERGB(173, 92, 45));///设置背景颜色
@@ -72,7 +87,13 @@ void Board::printBoard()///打印棋盘
         }
     }
 }
-void Board::out(int i, int j)///打印棋子和格子
+/**
+ * @name: out
+ * @msg: 分类别打印棋子和格子
+ * @param {int} i {int} j 代表对应点的行和列
+ * @return: void
+ */
+void Board::out(int i, int j)
 {
     if(chess[i / 30 - 1][j / 30 - 1] == 1)
     {
@@ -87,7 +108,13 @@ void Board::out(int i, int j)///打印棋子和格子
         fillellipse(i, j, 15, 15);
     }
 }
-void Board::player1()///玩家一
+/**
+ * @name: player1
+ * @msg: 玩家一下棋操作，先下棋再打印棋盘，判断是否胜利
+ * @param none
+ * @return: void
+ */
+void Board::player1()
 {
     turn = 1;
     if(FIRST)
@@ -102,7 +129,13 @@ void Board::player1()///玩家一
     printBoard();
     checkEnd();
 }
-void Board::player2()///玩家二
+/**
+ * @name: player2
+ * @msg: 玩家二下棋操作，先下棋再打印棋盘，判断是否胜利
+ * @param none
+ * @return: void
+ */
+void Board::player2()
 {
     turn = 2;
     if(FIRST)
@@ -117,7 +150,13 @@ void Board::player2()///玩家二
     printBoard();
     checkEnd();
 }
-void Board::checkEnd()///检查是否结束
+/**
+ * @name: checkEnd
+ * @msg: 检查是否结束，用判断五连的方法判断是否胜利，如果开启debug模式会显示棋盘所有点的打分值
+ * @param none
+ * @return: void
+ */
+void Board::checkEnd()
 {
     for(int u = 0; u < 4; u++)
     {
@@ -158,11 +197,23 @@ void Board::checkEnd()///检查是否结束
         exit(0);///直接退出程序
     }
 }
-bool Board::checkSame(int row, int col)///检查是否相同
+/**
+ * @name: checkSame
+ * @msg: 检查是否相同
+ * @param {int} row {int} col 传入的行和列，非全局变量行和列
+ * @return: bool 相同则返回true，不同返回false
+ */
+bool Board::checkSame(int row, int col)
 {
     return (chess[row][col] == turn);
 }
-int Board::sameSum(int u, int row, int col)///检查相同个数
+/**
+ * @name: sameSum
+ * @msg: 检查在一个方向上相同棋子个数
+ * @param {int} u 传入方向 {int} row {int} col 传入的行和列
+ * @return: {int} sum 总数
+ */
+int Board::sameSum(int u, int row, int col)
 {
     int sum = 0;
     int i;
@@ -173,7 +224,13 @@ int Board::sameSum(int u, int row, int col)///检查相同个数
     distance = i;
     return sum;
 }
-bool Board::checkAvailable(int row, int col) ///检查是否可落子
+/**
+ * @name: checkAvailable
+ * @msg: 检查是否可落子
+ * @param {int} row {int} col  传入的行和列
+ * @return: bool 可落子为true，不可落子为false
+ */
+bool Board::checkAvailable(int row, int col)
 {
     return (row >= 1 && row <= 15 && col >= 1 && col <= 15 && chess[row][col] == 0);
 }
@@ -182,7 +239,13 @@ bool Board::checkAvailable(int row, int col) ///检查是否可落子
 ///第一个不同色的点是空格，跳过空格继续往前延伸直到第二个不同色的点，
 ///同时从当前位置往反方向延伸直到第一个不同色的点， 算上当前位置本身，
 ///如果同色点的数量一共是4，那么该方向就有成五点。
-int Board::sumMakeFive(int row, int col)///成五点总数
+/**
+ * @name: sumMakeFive
+ * @msg: 成五点总数，用来计算冲四的个数，成五点形式为YabcdeY，其中abcde中4个1,1个0，所以考虑可以跳过一个空格然后4个1。但是不可跳过对方棋子或者墙壁
+ * @param {int} row {int} col  传入的行和列
+ * @return: {int} sum 总数
+ */
+int Board::sumMakeFive(int row, int col)
 {
     int sum = 0, i, u;
 
@@ -212,8 +275,13 @@ int Board::sumMakeFive(int row, int col)///成五点总数
 
     return sum;
 }
-
-int Board::sumLiveFour(int row, int col)///活四总数
+/**
+ * @name: sumLiveFour
+ * @msg: 活四总数
+ * @param {int} row {int} col  传入的行和列
+ * @return: {int} sum 总数
+ */
+int Board::sumLiveFour(int row, int col)
 {
     int sum = 0, u;
     for(u = 0; u < 4; u++)
@@ -230,11 +298,23 @@ int Board::sumLiveFour(int row, int col)///活四总数
     }
     return sum;
 }
-int Board::sumMakeFour(int row, int col)///冲四总数
+/**
+ * @name: sumMakeFour
+ * @msg: 冲四总数=成五点总数-2*活四总数
+ * @param {int} row {int} col  传入的行和列
+ * @return: {int} sum 总数
+ */
+int Board::sumMakeFour(int row, int col)
 {
     return sumMakeFive(row, col) - 2 * sumLiveFour(row, col);
 }
-int Board::sumLiveThree(int row, int col)///活三总数
+/**
+ * @name: sumLiveThree
+ * @msg: 活三总数
+ * @param {int} row {int} col  传入的行和列
+ * @return: {int} sum 总数
+ */
+int Board::sumLiveThree(int row, int col)
 {
     int u, sum = 0;
     for(u = 0; u < 4; u++)
@@ -275,8 +355,13 @@ int Board::sumLiveThree(int row, int col)///活三总数
     }
     return sum;
 }
-
-int Board::calculate(int row, int col)///计算分值
+/**
+ * @name: calculate
+ * @msg: 计算分值，如果这个点有棋子记0分，如果五连则50000分，如果活四则4320分，如果活三或者冲四则720分
+ * @param {int} row {int} col  传入的行和列
+ * @return: {int} point 打分值
+ */
+int Board::calculate(int row, int col)///
 {
     if(chess[row][col] != EMPTY)
         return 0;
@@ -289,7 +374,13 @@ int Board::calculate(int row, int col)///计算分值
     point += 4320 * sumLiveFour(row, col) + 720 * (sumMakeFive(row, col) + sumLiveThree(row, col));
     return point;
 }
-int Board::sumFive(int row, int col)///五连总数
+/**
+ * @name: sumFive
+ * @msg: 五连总数
+ * @param {int} row {int} col  传入的行和列
+ * @return: {int} sum 总数
+ */
+int Board::sumFive(int row, int col)
 {
     int sum = 0;
     for(int u = 0; u < 4; u++)
@@ -299,14 +390,32 @@ int Board::sumFive(int row, int col)///五连总数
     }
     return sum;
 }
-int Board::getRow()///获取行
+/**
+ * @name: getRow
+ * @msg: 获取行
+ * @param none
+ * @return: {int} row 全局变量行
+ */
+int Board::getRow()
 {
     return row;
 }
-int Board::getCol()///获取列
+/**
+ * @name: getCol
+ * @msg: 获取列
+ * @param {type}
+ * @return: {int} col 全局变量列
+ */
+int Board::getCol()
 {
     return col;
 }
+/**
+ * @name: getMouseLoc
+ * @msg: 获取鼠标位置并且定位到真实棋盘上，棋盘从60，60开始画起，每隔30一条线，所以要进行四舍五入和整数化
+ * @param none
+ * @return: void
+ */
 void Board::getMouseLoc()
 {
     int mousex = 0, mousey = 0;
@@ -334,10 +443,24 @@ void Board::getMouseLoc()
             continue;
     }
 }
+/**
+ * @name: getScore
+ * @msg: 计算当前点打分值，但是是以某一方的当前点利益为参考的，其实更好的方法是scoreAI-scoreHuman得出对于AI最有利，对于人类最不利的点
+ * @param {int} row {int} col  传入的行和列
+ * @return: {int} calculate(row,col) 当前点打分值
+ */
 int Board::getScore(int row, int col)
 {
     return calculate(row, col);
 }
+/**
+ * @name: AI_1_MAX
+ * @msg: 第一层若采用启发式搜素，会对225个点进行一个排序，得分高的优先进行第二层的运算，相当于修改第二层的顺序，有利于剪枝
+ * 若不采用启发式搜索，就对225个点依次调用二层运算
+ * 第一层代表AI的利益，所以取极大值
+ * @param none
+ * @return: void
+ */
 void Board::AI_1_MAX()
 {
     if(chess[8][8] == 0)
@@ -418,6 +541,12 @@ void Board::AI_1_MAX()
 
     return;
 }
+/**
+ * @name: AI_2_MIN
+ * @msg: 模拟对手进行二层运算，取极小值
+ * @param {int} score1 从第一层下来的数据，这个数据维护第一层的极大值，所以如果第二层算出来的点比这个值小，说明就不需要再算了，因为AI不可能选这个方案了
+ * @return: {int} score 维护第二层的极小值
+ */
 int Board::AI_2_MIN(int score1)
 {
     int score = 100000, temp = 0;
@@ -464,6 +593,13 @@ int Board::AI_2_MIN(int score1)
     }
     return score;
 }
+/**
+ * @name: AI_3_MAX
+ * @msg: 第三层是AI利益，取极大。如果第三层算出来的点比第二层的极小值要大，说明第三层这个点不可能使得第二层的极小值变小了，不需要再算了。
+ * 其实极大极小值算法是上下两层数据斜对角的关系
+ * @param {int} score2 从第二层传下来的维护极小值 {int} tempp 第二层当前计算值，用于提高难度/速度
+ * @return: {int} score 从第三层返回极大值
+ */
 int Board::AI_3_MAX(int score2,int tempp)
 {
     int score = -100000, temp = 0;
@@ -506,6 +642,12 @@ int Board::AI_3_MAX(int score2,int tempp)
     }
     return score;
 }
+/**
+ * @name: cmp
+ * @msg: > 为降序 < 为升序，结构体数组按照成员orderpoint降序排列
+ * @param {Order} x {Order} y 两个结构体
+ * @return: bool
+ */
 bool Board::cmp(Order x,Order y)
 {
     return (x.orderpoint) > (y.orderpoint);

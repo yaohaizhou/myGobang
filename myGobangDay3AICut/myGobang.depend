@@ -54,3 +54,17 @@
 1581755696 source:d:\workspaces\cbproject\mygobangday3\board.cpp
 	"Board.h"
 
+1581755696 source:d:\workspaces\githubrepo\mygobang\mygobangday3aicut\board.cpp
+	"Board.h"
+
+1581756053 d:\workspaces\githubrepo\mygobang\mygobangday3aicut\board.h
+	<iostream>
+	<array>
+	<windows.h>
+	<iomanip>
+	<cstdio>
+	<graphics.h>
+
+1581735663 source:d:\workspaces\githubrepo\mygobang\mygobangday3aicut\main.cpp
+	"Board.h"
+

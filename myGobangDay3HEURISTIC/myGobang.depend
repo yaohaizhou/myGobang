@@ -70,12 +70,11 @@
 1581777314 source:d:\workspaces\cbproject\mygobangday3cutelt\board.cpp
 	"Board.h"
 
-1581777314 source:d:\workspaces\githubrepo\mygobang\mygobangday3heuristic\board.cpp
+1581817709 source:d:\workspaces\cbproject\mygobangday3heuristic\board.cpp
 	"Board.h"
 
-1581777884 d:\workspaces\githubrepo\mygobang\mygobangday3heuristic\board.h
+1581818173 d:\workspaces\cbproject\mygobangday3heuristic\board.h
 	<iostream>
-	<vector>
 	<array>
 	<windows.h>
 	<iomanip>
@@ -83,6 +82,18 @@
 	<graphics.h>
 	<algorithm>
 
-1581735663 source:d:\workspaces\githubrepo\mygobang\mygobangday3heuristic\main.cpp
+1581815230 source:d:\workspaces\cbproject\mygobangday3heuristic\main.cpp
 	"Board.h"
+
+1581815230 source:d:\workspaces\githubrepo\mygobang\mygobangday3heuristic\main.cpp
+	"Board.h"
+
+1581818544 d:\workspaces\githubrepo\mygobang\mygobangday3heuristic\board.h
+	<iostream>
+	<array>
+	<windows.h>
+	<iomanip>
+	<cstdio>
+	<graphics.h>
+	<algorithm>
 
